@@ -1,0 +1,20 @@
+package NotificationCentralAssets_fla
+{
+   import flash.display.MovieClip;
+   
+   public dynamic class bar_22 extends MovieClip
+   {
+      public function bar_22()
+      {
+         super();
+      }
+   }
+}
+
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.display.InteractiveObject;
+import flash.display.MovieClip;
+import flash.display.Sprite;
+import flash.events.EventDispatcher;
+
