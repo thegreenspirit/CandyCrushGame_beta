@@ -7,6 +7,12 @@ package NotificationCentralAssets_fla
       public function exit_cross_mini_11()
       {
          super();
+         addFrameScript(0,this.frame1);
+      }
+      
+      internal function frame1() : *
+      {
+         stop();
       }
    }
 }

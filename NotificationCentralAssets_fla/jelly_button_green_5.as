@@ -12,6 +12,12 @@ package NotificationCentralAssets_fla
       public function jelly_button_green_5()
       {
          super();
+         addFrameScript(0,this.frame1);
+      }
+      
+      internal function frame1() : *
+      {
+         stop();
       }
    }
 }
