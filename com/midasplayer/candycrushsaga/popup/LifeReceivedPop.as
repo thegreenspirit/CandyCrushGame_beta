@@ -50,7 +50,7 @@ package com.midasplayer.candycrushsaga.popup
          }
          _popGfx.iGiftContainer.iPicContainer.addChild(_loc_6);
          _popGfx.tTitle.text = I18n.getString("popup_life_received_title");
-         _popGfx.tTitle.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         _popGfx.tTitle.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          _popGfx.tTitle.embedFonts = false;
          var _loc_8:* = I18n.getString("popup_life_received_message",_loc_5);
          if(!this._lifeAlreadySent)

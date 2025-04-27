@@ -4,6 +4,7 @@ package com.midasplayer.candycrushsaga.main
    import com.midasplayer.candycrushsaga.balance.*;
    import com.midasplayer.candycrushsaga.ccshared.*;
    import com.midasplayer.candycrushsaga.ccshared.event.*;
+   import com.midasplayer.candycrushsaga.main.CCMain;
    import com.midasplayer.candycrushsaga.engine.*;
    
    public class GameEventHandler

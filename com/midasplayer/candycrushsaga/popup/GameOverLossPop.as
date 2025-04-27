@@ -28,7 +28,7 @@ package com.midasplayer.candycrushsaga.popup
          _popGfx.tGameEndReason.setTextFormat(LocalConstants.FORMAT());
          _popGfx.tGameEndReason.embedFonts = false;
          _popGfx.tTitle.text = _loc_10;
-         _popGfx.tTitle.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         _popGfx.tTitle.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          _popGfx.tTitle.embedFonts = false;
          TextUtil.scaleToFit(_popGfx.tGameEndReason);
          TextUtil.scaleToFit(_popGfx.tTitle);

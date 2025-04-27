@@ -62,7 +62,7 @@ package com.midasplayer.candycrushsaga.main
             }
             miniature.gotoAndStop(2);
             miniature.text_level_number.text = I18n.getString("map_level_miniature_level",levelNumber);
-            miniature.text_level_number.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+            miniature.text_level_number.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
             miniature.text_level_number.embedFonts = false;
             miniature.miniature_container.addChild(pic);
             TextUtil.scaleToFit(miniature.text_level_number);

@@ -793,7 +793,7 @@ package com.midasplayer.candycrushsaga.charms
       {
          var fontName = "American Typewriter";
          if (param4 == false) {
-            fontName = "CCS_bananaSplit";
+            fontName = "PT Banana Split";
          }
          param1.text = param2;
          param1.setTextFormat(LocalConstants.FORMAT(fontName));

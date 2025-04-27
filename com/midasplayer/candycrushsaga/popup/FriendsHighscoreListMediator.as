@@ -143,7 +143,7 @@ package com.midasplayer.candycrushsaga.popup
          var _loc_6:int = 0;
          this.topListUserObjArr = [];
          this.viewComponent.higshscoreLabel.text = I18n.getString("popup_highscore_friends_label");
-         this.viewComponent.higshscoreLabel.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         this.viewComponent.higshscoreLabel.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          this.viewComponent.higshscoreLabel.embedFonts = false;
          TextUtil.scaleToFit(this.viewComponent.higshscoreLabel);
          var _loc_2:* = this.getPlayerPos(param1);
@@ -267,10 +267,10 @@ package com.midasplayer.candycrushsaga.popup
             param1.pictureHolder.pictureAttacher.addChild(_loc_8);
             param1.gotoAndStop(param2);
             param1.positionLabel.text = param3.pos;
-            param1.positionLabel.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+            param1.positionLabel.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
             param1.positionLabel.embedFonts = false;
             param1.nameLabel.text = _loc_4;
-            param1.nameLabel.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+            param1.nameLabel.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
             param1.nameLabel.embedFonts = false;
             param1.scoreValue.text = ScoreFormatter.format(param3.score);
             param1.scoreValue.setTextFormat(LocalConstants.FORMAT());

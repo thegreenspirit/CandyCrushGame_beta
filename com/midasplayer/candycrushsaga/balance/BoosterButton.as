@@ -305,7 +305,7 @@ package com.midasplayer.candycrushsaga.balance
          var _loc_1:* = this._inventory.getItemAmount(this._ccPowerUp.getType());
          trace(this._ccPowerUp.getType(),_loc_1);
          this._mcAmount.tAmount.text = _loc_1.toString();
-         this._mcAmount.tAmount.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         this._mcAmount.tAmount.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          this._mcAmount.tAmount.embedFonts = false;
          if(_loc_1 > this.previousAmount)
          {

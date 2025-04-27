@@ -1,7 +1,8 @@
-package com.midasplayer.candycrushsaga.popup
+﻿package com.midasplayer.candycrushsaga.popup
 {
    import com.king.saga.api.user.UserProfile;
    import com.midasplayer.candycrushsaga.engine.CCModel;
+   import com.midasplayer.candycrushsaga.main.CCMain;
    import com.midasplayer.candycrushsaga.popup.buttons.ExtendButton;
    import com.midasplayer.text.I18n;
    import flash.external.ExternalInterface;

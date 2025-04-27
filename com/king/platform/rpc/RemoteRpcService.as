@@ -1,58 +1,28 @@
 package com.king.platform.rpc
 {
-   import com.king.platform.events.ErrorCode;
-   import com.king.platform.events.ErrorEvent;
-   import com.king.platform.util.ExponentialBackoff;
-   import com.king.platform.util.KJSON;
-   import com.king.platform.util.Logger;
-   import flash.events.Event;
-   import flash.events.EventDispatcher;
-   import flash.events.IEventDispatcher;
-   import flash.events.IOErrorEvent;
-   import flash.net.URLLoader;
-   import flash.net.URLLoaderDataFormat;
-   import flash.net.URLRequest;
-   import flash.net.URLRequestMethod;
-   import flash.utils.setTimeout;
+   import com.king.platform.util.*;
+   import flash.events.*;
+   import flash.net.*;
+   import flash.utils.*;
    
-   public class RemoteRpcService extends EventDispatcher implements IRpcService
+   public class RemoteRpcService implements RpcService
    {
-      private const maxRetries:int = 3;
-      
       private var url:String;
       
-      private var sessionKeyProvider:SessionKeyProvider;
+      private var sessionKey:String;
       
-      private var statistics:StatsAccumulator;
-      
-      private var methodCalls:Vector.<MethodCall> = new Vector.<MethodCall>();
+      private var methodCalls:Vector.<MethodCall>;
       
       private var multi:Boolean;
       
-      private var retryInProgress:Boolean;
+      private var maxRetries:int = 3;
       
-      private var fatalError:Boolean;
-      
-      private var requestCount:int = 0;
-      
-      public var eventBus:IEventDispatcher;
-      
-      internal function urlLoaderFactory():URLLoader
-      {
-         return new URLLoader();
-      }
-      internal function exponentialBackoff(param1:uint, param2:uint):uint
-      {
-         return ExponentialBackoff.getTimeout(param1,param2);
-      }
-      public function RemoteRpcService(param1:String, param2:SessionKeyProvider, param3:StatsAccumulator = null)
+      public function RemoteRpcService(param1:String, param2:String)
       {
          super();
+         this.methodCalls = new Vector.<MethodCall>();
          this.url = param1;
-         this.sessionKeyProvider = param2;
-         this.statistics = param3 == null ? new DummyStatsAccumulator() : param3;
-         this.retryInProgress = false;
-         this.fatalError = false;
+         this.sessionKey = param2;
       }
       
       public function begin() : void
@@ -62,62 +32,32 @@ package com.king.platform.rpc
       
       public function send() : void
       {
-         if(this.fatalError)
-         {
-            Logger.debug("RPC: Blocking all RPCs because of fatal error");
-            return;
-         }
-         if(!this.retryInProgress)
-         {
-            this.jsonRpcCall(0);
-            this.multi = false;
-         }
+         this.jsonRpcCall(0);
       }
       
       public function call(param1:String, param2:Array, param3:Function = null, param4:Function = null) : void
       {
-         if(this.fatalError)
-         {
-            Logger.debug("RPC: Blocking all RPCs because of fatal error: " + param1);
-            param4(new JsonRpcError(JsonRpcErrorCode.FATAL,"FATAL"));
-            return;
-         }
          this.methodCalls.push(new MethodCall(param1,param2,param3,param4));
-         if(!this.multi && !this.retryInProgress)
+         if(!this.multi)
          {
             this.jsonRpcCall(0);
          }
       }
       
-      internal function jsonRpcCall(param1:int) : void
+      private function jsonRpcCall(param1:int) : void
       {
-         var i:uint;
-         var invokeErrorCallbacks:Function;
-         var loader:URLLoader;
+         var loader:*;
          var localMethodCalls:Vector.<MethodCall> = null;
-         var request:URLRequest = null;
-         var requestNr:int = 0;
          var json:String = null;
-         var requestId:uint = 0;
-         var retry:int = param1;
-         if(this.methodCalls.length <= 0)
-         {
-            return;
-         }
-         if(this.fatalError)
-         {
-            Logger.debug("RPC: Blocking all RPCs because of fatal error");
-            return;
-         }
+         var retry:* = undefined;
+         var i:uint = 0;
+         retry = undefined;
+         retry = param1;
          localMethodCalls = this.methodCalls;
-         this.methodCalls = new Vector.<MethodCall>();
-         request = new URLRequest();
-         request.url = this.url + "?_session=" + this.sessionKeyProvider.sessionKey;
+         var request:* = new URLRequest();
+         request.url = this.url + "?_session=" + this.sessionKey;
          request.method = URLRequestMethod.POST;
          request.contentType = "application/json";
-         requestNr = ++this.requestCount;
-         json = "[";
-         i = 0;
          while(i < localMethodCalls.length)
          {
             if(i > 0)
@@ -125,127 +65,62 @@ package com.king.platform.rpc
                json += ",";
             }
             json += "{\"id\":" + i + ",\"method\":\"" + localMethodCalls[i].method + "\"" + ",\"params\":" + KJSON.stringify(localMethodCalls[i].params) + "}";
-            i++;
+            i += 1;
          }
          json += "]";
          request.data = json;
-         Logger.debug("RPC: call#" + requestNr + "=" + json);
-         invokeErrorCallbacks = function(param1:Vector.<MethodCall>, param2:JsonRpcError):void
-         {
-            var i:uint = 0;
-            var methods:Vector.<MethodCall> = param1;
-            var error:JsonRpcError = param2;
-            i = 0;
-            while(i < methods.length)
-            {
-               try
-               {
-                  methods[i].errorCallback(error);
-               }
-               catch(error:Error)
-               {
-                  Logger.warn("RPC: error callback for " + methods[i].method + " threw exception " + error);
-               }
-               i++;
-            }
-         };
-         requestId = this.statistics.requestInitiated(retry > 0);
-         loader = this.urlLoaderFactory();
+         loader = new URLLoader();
          loader.dataFormat = URLLoaderDataFormat.TEXT;
          loader.addEventListener(Event.COMPLETE,function(param1:Event):void
          {
-            var jsonObj:Object;
-            var sessionTimeout:Boolean;
-            var i:uint;
-            var methodCall:MethodCall = null;
-            var error:JsonRpcError = null;
-            var event:Event = param1;
-            statistics.requestSucceeded(requestId,request);
-            Logger.debug("RPC: data#" + requestNr + "=" + event.target.data);
-            jsonObj = KJSON.parse(event.target.data);
-            sessionTimeout = false;
-            i = 0;
-            while(i < jsonObj.length)
+            var _loc3_:uint = 0;
+            trace("event.target.data=" + param1.target.data);
+            var _loc2_:* = KJSON.parse(param1.target.data);
+            while(_loc3_ < _loc2_.length)
             {
-               methodCall = localMethodCalls[jsonObj[i].id];
-               if(jsonObj[i].error != undefined)
+               if(_loc2_[_loc3_].error != undefined)
                {
-                  if(jsonObj[i].error.code == 2)
-                  {
-                     sessionTimeout = true;
-                     methodCalls.push(methodCall);
-                  }
-                  else
-                  {
-                     try
-                     {
-                        error = new JsonRpcError(jsonObj[i].code,jsonObj[i].message);
-                        methodCall.errorCallback(error);
-                     }
-                     catch(error:Error)
-                     {
-                        Logger.warn("RPC: error callback for " + methodCall.method + " threw exception " + error);
-                        throw error;
-                     }
-                  }
+                  localMethodCalls[_loc2_[_loc3_].id].errorCallback(_loc2_[_loc3_].error);
                }
                else
                {
-                  try
-                  {
-                     methodCall.callback(jsonObj[i].result);
-                  }
-                  catch(error:Error)
-                  {
-                     Logger.warn("RPC: callback for " + methodCall.method + " threw exception " + error);
-                     throw error;
-                  }
+                  localMethodCalls[_loc2_[_loc3_].id].callback(_loc2_[_loc3_].result);
                }
-               i++;
-            }
-            retryInProgress = false;
-            if(sessionTimeout)
-            {
-               fatalError = true;
-               invokeErrorCallbacks(localMethodCalls,new JsonRpcError(JsonRpcErrorCode.AUTHENTICATION_ERROR,"SessionTimeout"));
-               sendEvent(new ErrorEvent(ErrorEvent.FATAL,ErrorCode.SESSION_TIMEOUT));
-               Logger.error("RPC: SessionTimeout");
+               _loc3_ += 1;
             }
          });
-         loader.addEventListener(IOErrorEvent.IO_ERROR,function(param1:IOErrorEvent):void
+         loader.addEventListener(IOErrorEvent.IO_ERROR,function(param1:Event):void
          {
-            var _loc2_:MethodCall = null;
-            statistics.requestFailed(requestId);
-            retryInProgress = true;
-            Logger.debug("RPC: io_error#" + requestNr + "=" + param1.text);
-            if(retry >= maxRetries)
+            var _loc2_:uint = 0;
+            if(retry < maxRetries)
             {
-               fatalError = true;
-               invokeErrorCallbacks(localMethodCalls,new JsonRpcError(JsonRpcErrorCode.FATAL,param1.toString()));
-               sendEvent(new ErrorEvent(ErrorEvent.FATAL,ErrorCode.NO_CONNECTION));
+               setTimeout(jsonRpcCall,1000,retry + 1);
             }
             else
             {
-               for each(_loc2_ in localMethodCalls)
+               _loc2_ = 0;
+               while(_loc2_ < localMethodCalls.length)
                {
-                  methodCalls.push(_loc2_);
+                  localMethodCalls[_loc2_].errorCallback(param1.toString());
+                  _loc2_ += 1;
                }
-               setTimeout(jsonRpcCall,exponentialBackoff(1000,retry),retry + 1);
             }
          });
          loader.load(request);
+         this.methodCalls = new Vector.<MethodCall>();
+         this.multi = false;
       }
       
-      private function sendEvent(param1:ErrorEvent) : void
+      private function printObject(param1:Object, param2:String) : void
       {
-         Logger.debug("RPC: ErrorEvent(" + param1.type + ", " + param1.message + ")");
-         if(this.eventBus != null)
+         var _loc3_:String = null;
+         for(_loc3_ in param1)
          {
-            this.eventBus.dispatchEvent(param1);
-         }
-         else
-         {
-            dispatchEvent(param1);
+            trace(param2 + _loc3_ + ":" + param1[_loc3_]);
+            if(typeof param1[_loc3_] == "object")
+            {
+               this.printObject(param1[_loc3_],"  ");
+            }
          }
       }
    }
@@ -253,13 +128,13 @@ package com.king.platform.rpc
 
 class MethodCall
 {
-   internal var method:String;
+   public var method:String;
    
-   internal var params:Array;
+   public var params:Array;
    
-   internal var callback:Function;
+   public var callback:Function;
    
-   internal var errorCallback:Function;
+   public var errorCallback:Function;
    
    public function MethodCall(param1:String, param2:Array, param3:Function, param4:Function)
    {

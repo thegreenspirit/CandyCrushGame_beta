@@ -35,7 +35,7 @@ package com.midasplayer.candycrushsaga.popup.notificationcentral
          this.sendAcceptUnlockRequestTo = param5;
          this.picLoaderFn = param3;
          _clip.pop.header_txt.text = I18n.getString("popup_notification_central_header");
-         _clip.pop.header_txt.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         _clip.pop.header_txt.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          _clip.pop.header_txt.embedFonts = false;
          _clip.pop.request_txt.text = I18n.getString("popup_notification_central_message_count",param1.length);
          _clip.pop.request_txt.setTextFormat(LocalConstants.FORMAT());

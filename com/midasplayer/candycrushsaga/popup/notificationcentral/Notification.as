@@ -120,7 +120,7 @@ package com.midasplayer.candycrushsaga.popup.notificationcentral
          this._clip.picture_frame.picture_container.addChild(_loc_6);
          this._clip.symbols.gotoAndStop(1);
          this._clip.header_txt.text = I18n.getString("popup_notification_central_life_request_header",_loc_4);
-         this._clip.header_txt.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         this._clip.header_txt.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          this._clip.header_txt.embedFonts = false;
          this._clip.body_txt.text = I18n.getString("popup_notification_central_life_request_message",_loc_4);
          this._clip.body_txt.setTextFormat(LocalConstants.FORMAT());
@@ -142,7 +142,7 @@ package com.midasplayer.candycrushsaga.popup.notificationcentral
          this._tmpEpisodeId = LevelUnlockRequestEvent(event).getEpisodeId();
          this._tmpLevelId = LevelUnlockRequestEvent(event).getLevelId();
          this._clip.header_txt.text = I18n.getString("popup_notification_central_unlock_request_header",_loc_4);
-         this._clip.header_txt.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         this._clip.header_txt.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          this._clip.header_txt.embedFonts = false;
          this._clip.body_txt.text = I18n.getString("popup_notification_central_unlock_request_message",_loc_4);
          this._clip.body_txt.setTextFormat(LocalConstants.FORMAT());

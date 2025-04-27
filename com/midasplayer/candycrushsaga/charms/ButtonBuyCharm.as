@@ -55,7 +55,7 @@ package com.midasplayer.candycrushsaga.charms
          if(_loc_2)
          {
             _loc_2.text = StringUtil.trim(param1);
-            _loc_2.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+            _loc_2.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
             _loc_2.embedFonts = false;
             _loc_2.autoSize = TextFieldAutoSize.CENTER;
             if(_loc_2.textWidth > 50)

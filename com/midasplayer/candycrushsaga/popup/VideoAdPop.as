@@ -22,7 +22,7 @@ package com.midasplayer.candycrushsaga.popup
          this.closeFn = param2;
          this.viewVideoCb = param1;
          _popGfx.text_header.text = I18n.getString("popup_videoad_header");
-         _popGfx.text_header.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         _popGfx.text_header.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          _popGfx.text_header.embedFonts = false;
          _popGfx.text_message.text = I18n.getString("popup_videoad_message");
          _popGfx.text_message.setTextFormat(LocalConstants.FORMAT());

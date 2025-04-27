@@ -22,7 +22,7 @@ package com.midasplayer.candycrushsaga.popup
          var _loc_5:* = param4(param1);
          _popGfx.iGiftContainer.iPicContainer.addChild(_loc_5);
          _popGfx.tTitle.text = I18n.getString("popup_collaboration_received_header");
-         _popGfx.tTitle.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         _popGfx.tTitle.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          _popGfx.tTitle.embedFonts = false;
          _popGfx.tMessage.text = I18n.getString("popup_collaboration_received_message",param3);
          _popGfx.tMessage.setTextFormat(LocalConstants.FORMAT());

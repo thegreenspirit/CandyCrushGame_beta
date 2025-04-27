@@ -1,6 +1,7 @@
 package com.midasplayer.candycrushsaga.main
 {
    import com.midasplayer.candycrushsaga.ccshared.*;
+   import com.midasplayer.candycrushsaga.main.CCMain;
    import com.midasplayer.candycrushsaga.tutorial.*;
    import flash.display.*;
    import flash.events.*;

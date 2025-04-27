@@ -1,5 +1,6 @@
-package com.midasplayer.candycrushsaga.tutorial
+﻿package com.midasplayer.candycrushsaga.tutorial
 {
+   import com.midasplayer.candycrushsaga.main.CCMain;
    import com.midasplayer.candycrushsaga.main.ICCQueueElement;
    import flash.events.EventDispatcher;
    

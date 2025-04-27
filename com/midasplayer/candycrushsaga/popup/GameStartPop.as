@@ -60,12 +60,12 @@ package com.midasplayer.candycrushsaga.popup
             this.setupBoosterModule(param5,this._gameMode);
          }
          _popGfx.tLevel.text = I18n.getString("popup_game_start_level",param6.getTotalLevel());
-         _popGfx.tLevel.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         _popGfx.tLevel.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          _popGfx.tLevel.embedFonts = false;
          if(_loc_7 < 3)
          {
             _popGfx.iTarget.tNextTarget.text = I18n.getString("popup_game_start_next_target",ScoreFormatter.format(this._nextScoreTarget));
-            _popGfx.iTarget.tNextTarget.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+            _popGfx.iTarget.tNextTarget.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
             _popGfx.iTarget.tNextTarget.embedFonts = false;
             TextUtil.scaleToFit(_popGfx.iTarget.tNextTarget);
          }
@@ -137,7 +137,7 @@ package com.midasplayer.candycrushsaga.popup
       private function setupBoosterModule(param1:Inventory, param2:String) : void
       {
          _popGfx.tSelectBoosters.text = I18n.getString("popup_game_start_select_boosters");
-         _popGfx.tSelectBoosters.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         _popGfx.tSelectBoosters.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          _popGfx.tSelectBoosters.embedFonts = false;
          this._boostermodule = new BoosterModule(param1,param2);
          TextUtil.scaleToFit(_popGfx.tSelectBoosters);
@@ -190,7 +190,7 @@ package com.midasplayer.candycrushsaga.popup
          var _loc_3:* = param1.userPic;
          _popGfx.iTarget.targetPicHolder.addChild(_loc_3);
          _popGfx.iTarget.tNextTarget.text = I18n.getString("popup_game_start_next_target",ScoreFormatter.format(_loc_2));
-         _popGfx.iTarget.tNextTarget.setTextFormat(LocalConstants.FORMAT("CCS_bananaSplit"));
+         _popGfx.iTarget.tNextTarget.setTextFormat(LocalConstants.FORMAT("PT Banana Split"));
          _popGfx.iTarget.tNextTarget.embedFonts = false;
          Console.println("@ setTopPlayer() - GameStartPop.as | score: " + _loc_2.toString());
       }
