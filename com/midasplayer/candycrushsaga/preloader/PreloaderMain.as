@@ -194,6 +194,7 @@
          }
          switch(param1)
          {
+            // TODO: figure out the order of loading
             case "gameAssets":
                this._preLoaderBG.loadingProgress.text = this.getPreText("preloader_loading_part6_message");
                break;
@@ -207,7 +208,7 @@
                this._preLoaderBG.loadingProgress.text = this.getPreText("preloader_loading_part5_message");
                break;
             case "cutsceneAsset":
-               this._preLoaderBG.loadingProgress.text = "";
+               this._preLoaderBG.loadingProgress.text = ""; // is this displayed in the preloader? 
                break;
             case "complete":
                this._preLoaderBG.loadingProgress.text = this.getPreText("preloader_loading_complete_header");

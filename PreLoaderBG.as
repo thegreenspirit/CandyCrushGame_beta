@@ -8,10 +8,6 @@ package
    {
       public var loadingProgress:TextField;
       
-      public var startBtn:SimpleButton;
-      
-      public var bg:MovieClip;
-      
       public var loadingHeader:TextField;
       
       public var animBar:MovieClip;
