@@ -87,7 +87,8 @@
          var bugReportUrl:String = null;
          var mainFileUrl:String = null;
          this._loaderParams = this.root.loaderInfo.parameters;
-         new GameConsole(stage,CCConstants.STAGE_WIDTH,CCConstants.STAGE_HEIGHT,this._loaderParams.apiUrl == null || String(this._loaderParams.apiUrl).search("dev.midasplayer.") > -1 || String(this._loaderParams.apiUrl).search("candycrushqa.midasplayer.com") > -1,this._onConsoleToggle);
+         //new GameConsole(stage,CCConstants.STAGE_WIDTH,CCConstants.STAGE_HEIGHT,this._loaderParams.apiUrl == null || String(this._loaderParams.apiUrl).search("dev.midasplayer.") > -1 || String(this._loaderParams.apiUrl).search("candycrushqa.midasplayer.com") > -1,this._onConsoleToggle);
+         new GameConsole(stage,CCConstants.STAGE_WIDTH,CCConstants.STAGE_HEIGHT,true,this._onConsoleToggle); // enable console
          if(this._loaderParams["texts"])
          {
             this.setupPreLanguage(new JSONDecoder(this._loaderParams["texts"].replace(/#/g,"\""),false));

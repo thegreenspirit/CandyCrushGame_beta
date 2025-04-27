@@ -1,4 +1,4 @@
-package com.midasplayer.console
+﻿package com.midasplayer.console
 {
    import flash.display.Sprite;
    
@@ -9,21 +9,21 @@ package com.midasplayer.console
          super();
       }
       
-      public static function println(param1:String, ... rest) : void
+      public static function println(value:String, ... args) : void
       {
-         trace(param1);
+         trace(value);
       }
       
-      public static function registerProcessor(... rest) : void
+      public static function registerProcessor(... args) : void
       {
       }
       
-      public static function unRegisterProcessor(param1:String, ... rest) : void
+      public static function unRegisterProcessor(value:String, ... args) : void
       {
-         trace(param1 + rest.toString());
+         trace(value + args.toString());
       }
       
-      public static function disablePrintCategory(... rest) : void
+      public static function disablePrintCategory(... args) : void
       {
       }
       
@@ -41,4 +41,10 @@ package com.midasplayer.console
       }
    }
 }
+
+import flash.display.DisplayObject;
+import flash.display.DisplayObjectContainer;
+import flash.display.InteractiveObject;
+import flash.display.Sprite;
+import flash.events.EventDispatcher;
 
