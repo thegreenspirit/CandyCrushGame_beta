@@ -4,6 +4,7 @@
    import com.king.platform.client.*;
    import com.king.platform.rpc.*;
    import com.midasplayer.candycrushsaga.ccshared.*;
+   import com.midasplayer.candycrushsaga.ccshared.utils.CandyCrushGameConsole;
    import com.midasplayer.candycrushsaga.game.*;
    import com.midasplayer.candycrushsaga.main.*;
    import com.midasplayer.console.*;
@@ -87,8 +88,14 @@
          var bugReportUrl:String = null;
          var mainFileUrl:String = null;
          this._loaderParams = this.root.loaderInfo.parameters;
-         //new GameConsole(stage,CCConstants.STAGE_WIDTH,CCConstants.STAGE_HEIGHT,this._loaderParams.apiUrl == null || String(this._loaderParams.apiUrl).search("dev.midasplayer.") > -1 || String(this._loaderParams.apiUrl).search("candycrushqa.midasplayer.com") > -1,this._onConsoleToggle);
-         new GameConsole(stage,CCConstants.STAGE_WIDTH,CCConstants.STAGE_HEIGHT,true,this._onConsoleToggle); // enable console
+		 // the old code here just summons the GameConsole, so that's that
+		 // 
+		 // we still don't want to use CandyCrushGameConsole though as
+		 // it's from the newer versions, so try to remove it
+		 if (Console is DummyConsole) {
+            //Console = new CandyCrushGameConsole(stage,CCConstants.STAGE_WIDTH,CCConstants.STAGE_HEIGHT,this._loaderParams.apiUrl == null || String(this._loaderParams.apiUrl).search("dev.midasplayer.") > -1 || String(this._loaderParams.apiUrl).search("candycrushqa.midasplayer.com") > -1,this._onConsoleToggle);
+            Console = new CandyCrushGameConsole(stage,CCConstants.STAGE_WIDTH,CCConstants.STAGE_HEIGHT,true,this._onConsoleToggle); // enable console
+         }
          if(this._loaderParams["texts"])
          {
             this.setupPreLanguage(new JSONDecoder(this._loaderParams["texts"].replace(/#/g,"\""),false));
@@ -96,6 +103,7 @@
          Debug.setAssertHandler(this);
          if(this._loaderParams.apiUrl != null && String(this._loaderParams.apiUrl).search("candycrush.king.com") > -1)
          {
+            // huh?
          }
          stage.showDefaultContextMenu = false;
          stage.scaleMode = StageScaleMode.NO_SCALE;
@@ -123,14 +131,13 @@
                Console.println("Error parsing swf urls: " + e);
             }
             mainFileKey = "/swf/CCMain.swf";
-            Debug.assert(swfUrls[mainFileKey] == null,"Trying to use a swf url that doesn\'t exist: \"" + swfUrls[mainFileKey] + "\"");
             if(swfUrls[mainFileKey])
             {
                mainFileUrl = swfUrls[mainFileKey];
             }
             else
             {
-               mainFileUrl = swfUrls[mainFileKey];
+               Debug.assert(swfUrls[mainFileKey] == null,"Trying to use a swf url that doesn\'t exist: \"" + swfUrls[mainFileKey] + "\"");
             }
          }
          else
