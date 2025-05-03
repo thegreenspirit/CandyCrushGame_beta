@@ -23,6 +23,7 @@ package com.midasplayer.debug
          else
          {
             _loc3_ = formatStackTrace(new Error().getStackTrace());
+            trace("Assertion failed" + (!!param2 ? ": " + param2 : "") + (_loc3_.length > 0 ? "\n" + _loc3_ : ""));
          }
       }
       

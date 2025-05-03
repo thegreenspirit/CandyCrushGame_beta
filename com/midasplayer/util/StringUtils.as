@@ -9,66 +9,66 @@ package com.midasplayer.util
       
       public static function leftAlign(param1:String, param2:int) : String
       {
-         var _loc_3:* = param2 - param1.length;
-         if(_loc_3 <= 0)
+         var _loc3_:* = param2 - param1.length;
+         if(_loc3_ <= 0)
          {
             return param1;
          }
-         var _loc_4:String = " ";
-         var _loc_5:int = 1;
-         while(_loc_5 < _loc_3)
+         var _loc4_:String = " ";
+         var _loc5_:int = 1;
+         while(_loc5_ < _loc3_)
          {
-            _loc_4 += " ";
-            _loc_5++;
+            _loc4_ += " ";
+            _loc5_++;
          }
-         return param1 + _loc_4;
+         return param1 + _loc4_;
       }
       
       public static function rightAlign(param1:String, param2:int) : String
       {
-         var _loc_3:* = param2 - param1.length;
-         if(_loc_3 <= 0)
+         var _loc3_:* = param2 - param1.length;
+         if(_loc3_ <= 0)
          {
             return param1;
          }
-         var _loc_4:String = " ";
-         var _loc_5:int = 1;
-         while(_loc_5 < _loc_3)
+         var _loc4_:String = " ";
+         var _loc5_:int = 1;
+         while(_loc5_ < _loc3_)
          {
-            _loc_4 += " ";
-            _loc_5++;
+            _loc4_ += " ";
+            _loc5_++;
          }
-         return _loc_4 + param1;
+         return _loc4_ + param1;
       }
       
       public static function countOccurrence(param1:String, param2:String, param3:Boolean = false, param4:Boolean = false) : int
       {
-         var _loc_5:int = 0;
+         var _loc5_:int = 0;
          if(param2 == "")
          {
             return 0;
          }
-         var _loc_6:* = param1.indexOf(param2);
+         var _loc6_:* = param1.indexOf(param2);
          if(param1.indexOf(param2) == -1)
          {
             return 0;
          }
-         if(!param4 && _loc_6 == 0)
+         if(!param4 && _loc6_ == 0)
          {
-            _loc_5++;
+            _loc5_++;
          }
          do
          {
-            _loc_5++;
-            _loc_6 = param1.indexOf(param2,_loc_6) + 1;
+            _loc5_++;
+            _loc6_ = param1.indexOf(param2,_loc6_) + 1;
          }
-         while(_loc_6 != 0);
+         while(param1.indexOf(param2,_loc6_) != 0);
          
          if(param3 && param1.lastIndexOf(param2) == param1.length - param2.length)
          {
-            _loc_5 -= 1;
+            _loc5_--;
          }
-         return _loc_5;
+         return _loc5_;
       }
    }
 }

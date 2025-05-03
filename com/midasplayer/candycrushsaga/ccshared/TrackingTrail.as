@@ -11,7 +11,7 @@ package com.midasplayer.candycrushsaga.ccshared
       
       public static function track(param1:String) : void
       {
-         trace(param1);
+         //trace(param1);
          trailArr.push(param1);
       }
       

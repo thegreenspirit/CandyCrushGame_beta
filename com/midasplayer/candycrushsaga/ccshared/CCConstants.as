@@ -95,14 +95,14 @@ package com.midasplayer.candycrushsaga.ccshared
       
       public static function calculateGameFailReasonCode(param1:String) : int
       {
-         var _loc_2:int = 0;
-         var _loc_3:int = 0;
-         while(_loc_3 < param1.length)
+         var _loc2_:int = 0;
+         var _loc3_:int = 0;
+         while(_loc3_ < param1.length)
          {
-            _loc_2 += param1.charCodeAt(_loc_3);
-            _loc_3++;
+            _loc2_ += param1.charCodeAt(_loc3_);
+            _loc3_++;
          }
-         return _loc_2;
+         return _loc2_;
       }
    }
 }
